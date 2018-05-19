@@ -1,0 +1,22 @@
+h1#test Rides
+.row
+  .col-md-9
+    div.bg-info
+      ol
+        li 1
+        li 2
+
+  .col-md-3
+    div.bg-success
+      ul
+        li 1
+        li 2
+
+.row
+  - @rides.each do |ride|
+    .col-md-9
+      li = ride.id
+      li = ride.name
+      li = ride.kind
+      li = ride.description
+      li = ride.url
