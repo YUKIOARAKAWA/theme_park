@@ -5,7 +5,7 @@ class CreateParks < ActiveRecord::Migration[5.1]
       t.string :prefecture_name
       t.text :description
       t.date :established
-      t.string :url
+      t.text :url
 
       t.timestamps
     end

@@ -14,7 +14,7 @@ class CreateRides < ActiveRecord::Migration[5.1]
       t.integer :age_restriction
       t.integer :height_restriction
       t.date :established
-      t.string :url
+      t.text :url
 
       t.timestamps
     end

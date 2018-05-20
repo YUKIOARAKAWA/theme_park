@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20180519100457) do
     t.string "prefecture_name"
     t.text "description"
     t.date "established"
-    t.string "url"
+    t.text "url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 20180519100457) do
     t.integer "age_restriction"
     t.integer "height_restriction"
     t.date "established"
-    t.string "url"
+    t.text "url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
