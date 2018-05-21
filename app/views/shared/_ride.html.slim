@@ -20,13 +20,17 @@
 
         tr
           td 説明
-          td = ride.description
+          td = no_info_if_blank ride.description
 
         tr
           td 最大スピード
-          td
-            span.badge = ride.max_speed
-            | km/h
+          - if ride.max_speed.present?
+            td
+              span.badge = ride.max_speed
+              | km/h
+          - else
+            td
+              span -
 
         tr
           td 最高到達地点
@@ -36,28 +40,38 @@
 
         tr
           td 最大G
-          td = ride.max_g
+          - if ride.max_g.present?
+            td
+              span.badge = ride.max_g
+              | G
+          - else
+            td
+              span -
 
         tr
           td 全長
-          td
-            span.badge = ride.length
-            | m
+          - if ride.length.present?
+            td
+              span.badge = ride.length
+              | m
+          - else
+            td
+              span -
 
         tr
           td 年齢制限
           td
-            span.badge = ride.age_restriction
+            span = ride.age_restriction
             | 歳以上
 
         tr
           td 身長制限
           td
-            span.badge = ride.height_restriction
+            span = ride.height_restriction
             | cm以上
 
         tr
           td 設立年度
           td
-            span.badge = ride.established
+            span = ride.established
             | 年
