@@ -39,21 +39,21 @@
             | m
 
         tr
-          td 最大G
-          - if ride.max_g.present?
-            td
-              span.badge = ride.max_g
-              | G
-          - else
-            td
-              span -
-
-        tr
           td 全長
           - if ride.length.present?
             td
               span.badge = ride.length
               | m
+          - else
+            td
+              span -
+
+        tr
+          td 最大G
+          - if ride.max_g.present?
+            td
+              span.badge = ride.max_g
+              | G
           - else
             td
               span -
