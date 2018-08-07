@@ -1,3 +1,8 @@
+server '18.179.142.9', user: 'yukio', roles: %w{app db web}
+set :deploy_to, '/home/yukio/test_deploy/theme_park'
+set :branch, 'master'
+set :rails_env, 'production'
+
 # server-based syntax
 # ======================
 # Defines a single server with a list of roles and multiple properties.

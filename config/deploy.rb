@@ -1,8 +1,16 @@
 # config valid for current version and patch releases of Capistrano
 lock "~> 3.11.0"
 
-set :application, "my_app_name"
-set :repo_url, "git@example.com:me/my_repo.git"
+set :application, "theme_park"
+set :repo_url, "git@github.com:YUKIOARAKAWA/theme_park.git"
+
+
+# 追加
+set :scm, :git
+set :rbenv_type, :user
+set :rbenv_ruby, '2.5.1'
+set :unicorn_config_path, 'config/unicorn.rb'
+
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
@@ -21,10 +29,10 @@ set :repo_url, "git@example.com:me/my_repo.git"
 # set :pty, true
 
 # Default value for :linked_files is []
-# append :linked_files, "config/database.yml"
+append :linked_files, 'config/database.yml', 'config/secrets.yml'
 
 # Default value for linked_dirs is []
-# append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
+append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
@@ -37,3 +45,32 @@ set :repo_url, "git@example.com:me/my_repo.git"
 
 # Uncomment the following to require manually verifying the host key before first deploy.
 # set :ssh_options, verify_host_key: :secure
+
+
+# unicorn config
+namespace :deploy do
+
+  desc 'Restart application'
+  task :restart do
+  invoke 'unicorn:stop'
+  on roles(:app), in: :sequence, wait: 5 do
+    while (capture "if [ -e #{fetch(:unicorn_pid)} ];then echo running;else echo stop;fi").include?('running') do
+      execute "sleep 1"
+    end
+  end
+  invoke 'unicorn:start'
+  end
+
+  # publishing$B$N8e$K%j%9%?!<%H(B
+  after :publishing, :restart
+
+  after :restart, :clear_cache do
+    on roles(:web), in: :groups, limit: 3, wait: 10 do
+      # Here we can do anything such as:
+      # within release_path do
+      #   execute :rake, 'cache:clear'
+      # end
+    end
+  end
+
+end
