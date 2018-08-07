@@ -12,10 +12,7 @@
 
 ActiveRecord::Schema.define(version: 20180519100457) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
-  create_table "parks", force: :cascade do |t|
+  create_table "parks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
     t.string "prefecture_name"
     t.text "description"
@@ -25,7 +22,7 @@ ActiveRecord::Schema.define(version: 20180519100457) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "rides", force: :cascade do |t|
+  create_table "rides", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
     t.integer "park_id"
     t.string "kind"
